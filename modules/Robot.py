@@ -16,43 +16,43 @@ class Robot():
     T = Tone()
     
     def run(self, value=-50):
-      M.run_forever(value)
+     self. M.run_forever(value)
     
-    def check_obstacle():
-      return touch.is_pushed
+    def check_obstacle(self):
+      return self.touch.is_pushed
     
     def sigint_handler(signal, frame): #defines interrupt handler
-      shutdown_sequence()
+      self.shutdown_sequence()
     
-    def startup():
-      M.stop_mode = 'brake'	#robot stops in place
-      L.left.color=LED.COLOR.GREEN
-      L.right.color=LED.COLOR.GREEN
-      signal.signal(signal.SIGINT, sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
+    def startup(self):
+      self.M.stop_mode = 'brake'	#robot stops in place
+      self.L.left.color=LED.COLOR.GREEN
+      self.L.right.color=LED.COLOR.GREEN
+      signal.signal(signal.SIGINT, self.sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
       
-    def stop():
-      M.stop()
+    def stop(self):
+      self.M.stop()
       
-    def start():
-      l.left.color=LED.COLOR.GREEN
-      l.left.on()
+    def start(self):
+      self.L.left.color=LED.COLOR.GREEN
+      self.L.left.on()
       self.run()
      
-    def shutdown():
+    def shutdown(self):
       self.stop()
-      M.stop_mode = 'coast'	#free motor
-      L.left.color=LED.COLOR.AMBER
-      L.left.on()
-      T.play(440)
+      self.M.stop_mode = 'coast'	#free motor
+      self.L.left.color=LED.COLOR.AMBER
+      self.L.left.on()
+      self.T.play(440)
       time.sleep(0.1)
-      L.left.color=LED.COLOR.GREEN
-      L.left.on()
-      T.stop()
+      self.L.left.color=LED.COLOR.GREEN
+      self.L.left.on()
+      self.T.stop()
       sys.exit(0)
       
-    def obstacle():	#obstacle is present
-      L.left.color=LED.COLOR.YELLOW
-      L.left.on()
+    def obstacle(self):	#obstacle is present
+      self.L.left.color=LED.COLOR.YELLOW
+      self.L.left.on()
       self.stop()
       
       
