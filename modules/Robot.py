@@ -3,7 +3,7 @@ from ev3.lego import TouchSensor
 from ev3.lego import ColorSensor
 from ev3.lego import InfraredSensor
 from override import m_over as Motor
-from ev3.lego import MediumMotor as MMotor
+from override  import mm_over as MMotor
 from ev3.ev3dev import LED
 from ev3.ev3dev import Tone
 from ev3.ev3dev import Key
@@ -62,23 +62,20 @@ class Robot():
 		# sets handler for keyboard interrupt( CTRL + C)
 
 	def Read(self):
+	        """valueN is channel N+1 
+		1 U
+		2 D
+		3  U
+		4  D
+		5 UU
+		6 UD
+		7 DU
+		8 DD
+		9 beacon"""
 		return [self.IR.value0, self.IR.value1, self.IR.value2, self.IR.value3]
-		#valueN is channel N+1 
-		#1 U
-		#2 D
-		#3  U
-		#4  D
-		#5 UU
-		#6 UD
-		#7 DU
-		#8 DD
-		#9 beacon
+		
 
-	def run(self):
-		self.A.run_forever(self.S)
-		self.C.run_forever(self.S)
-
-	def run(self, value1=300, value2=300):
+	def run(self, value1=600, value2=600):
 		self.A.run_forever(value1)
 		self.C.run_forever(value2)
 
@@ -154,3 +151,7 @@ class Robot():
 		    print ('Can\'t go so fast!')
 		    val = 800
 		self.S = val
+
+        def changestate(self, value=0):
+                self.B.set_rel_position(value, speed_sp=300)
+		self.B.start()
