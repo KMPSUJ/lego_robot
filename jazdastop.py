@@ -14,6 +14,6 @@ while(True):
       k = k+1
     else:
       R.start()
-      k = 0
+  #    k = 0
     if(k > 10 or R.K.backspace):
       R.shutdown()

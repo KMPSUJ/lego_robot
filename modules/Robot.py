@@ -7,6 +7,7 @@ import unittest
 import time
 import signal
 import sys
+import random
 
 class Robot():
     touch = TouchSensor()
@@ -30,8 +31,8 @@ class Robot():
     def check_obstacle(self):
       return (self.touch.is_pushed and (not self.B))
     
-    def sigint_handler(signal, frame): #defines interrupt handler
-      self.shutdown_sequence()
+    def sigint_handler(self, signal, frame): #defines interrupt handler
+      self.shutdown()
     
     def startup(self):
       self.M1.stop_mode = 'brake'	#robot stops in place
@@ -69,20 +70,24 @@ class Robot():
       self.L.left.on()
       self.B = True
       self.run_dist(-1)
+      time.sleep(0.1)
       while(not self.ru()):
 	time.sleep(0.1)
-      self.turn(-10)
+#      time.sleep(1)
+      self.turn(1/6.0 + 0.25 * random.random())
+      time.sleep(0.1)
       while(not self.ru()):
 	time.sleep(0.1)
       self.B = False
-      self.stop()
+#      self.stop()
+#      self.shutdown()
 
     def ru(self):
       return ((self.M1.pulses_per_second == 0) and (self.M2.pulses_per_second == 0))
 
     def turn(self, value = 1):
-      self.M1.set_rel_position(720*value, speed_sp=300)
-      self.M2.set_rel_position(-720*value, speed_sp=-300)
+      self.M1.set_rel_position(2248*value, speed_sp=300)
+      self.M2.set_rel_position(-2248*value, speed_sp=-300)
       self.go()
 
     def run_dist(self,value = 1):
