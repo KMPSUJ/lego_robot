@@ -1,4 +1,4 @@
-import time
+import time, datetime
 from modules import Robot as r
 
 k = 0
@@ -6,16 +6,20 @@ k = 0
 R = r.Robot()
 R.startup()
 R.start()
-<<<<<<< HEAD
-s = open("out", 'w')
-=======
-s = open("out",'w')
->>>>>>> 87033328f92405016d35943f5808870c2149faeb
+R.S = 200
+# R.run()
+R.turn(2)
+s = open("out",'a')
+st = ''
+s.write(str(datetime.datetime.today()))
 
 while(True):
-    time.sleep(.1)
-    s.write(str(R.C.rgb))
-    s.write('\n')
+    time.sleep(.01)
+    ref = R.C.rgb
+    if ref[1] < 145:
+        R.T.play(440,80)
+    st += (str(ref))
+    st += ('\n')
     if(R.check_obstacle()):
         R.obstacle()
         k = k+1
@@ -23,10 +27,6 @@ while(True):
         R.start()
         #     k = 0
     if(k > 10 or R.K.backspace):
-<<<<<<< HEAD
+        s.write(st)
         s.close()
         R.shutdown()
-=======
-      s.close()
-      R.shutdown()
->>>>>>> 87033328f92405016d35943f5808870c2149faeb
