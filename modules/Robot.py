@@ -10,13 +10,15 @@ import sys
 
 class Robot():
     touch = TouchSensor()
-    M = Motor(port=Motor.PORT.A)
+    M1 = Motor(port=Motor.PORT.A)
+    M2 = Motor(port=Motor.PORT.D)
     K = Key()
     L = LED()
     T = Tone()
     
-    def run(self, value=-50):
-     self. M.run_forever(value)
+    def run(self, value1=50, value2=50):
+     self.M1.run_forever(value1)
+     self.M2.run_forever(value2)
     
     def check_obstacle(self):
       return self.touch.is_pushed
@@ -25,13 +27,15 @@ class Robot():
       self.shutdown_sequence()
     
     def startup(self):
-      self.M.stop_mode = 'brake'	#robot stops in place
+      self.M1.stop_mode = 'brake'	#robot stops in place
+      self.M2.stop_mode = 'brake'	#robot stops in place
       self.L.left.color=LED.COLOR.GREEN
       self.L.right.color=LED.COLOR.GREEN
       signal.signal(signal.SIGINT, self.sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
       
     def stop(self):
-      self.M.stop()
+      self.M1.stop()
+      self.M2.stop()
       
     def start(self):
       self.L.left.color=LED.COLOR.GREEN
@@ -40,7 +44,8 @@ class Robot():
      
     def shutdown(self):
       self.stop()
-      self.M.stop_mode = 'coast'	#free motor
+      self.M1.stop_mode = 'coast'	#free motor
+      self.M2.stop_mode = 'coast'	#free motor
       self.L.left.color=LED.COLOR.AMBER
       self.L.left.on()
       self.T.play(440)
@@ -54,6 +59,10 @@ class Robot():
       self.L.left.color=LED.COLOR.YELLOW
       self.L.left.on()
       self.stop()
+    def tur2(self, angle=1):
+      self.M1.run_position_limited(angle * 60, 360, stop_mode=self.M1.STOP_MODE.BRAKE)
+    def turn2(self, angle=-1):
+      self.M2.run_position_limited(angle * 60, 360, stop_mode=self.M1.STOP_MODE.BRAKE)
       
-      
+     
     
