@@ -36,7 +36,7 @@ class TestLcd():
         s = s+"^"
         self.d.draw.text((10, 10), s, font=font)
         s = str(self.count[0])+str(self.count[1])
-        +str(self.count[2])+str(self.count[3])+str(self.count[4])
+        s+=str(self.count[2])+str(self.count[3])+str(self.count[4])
         self.d.draw.text((10, 20), s, font=font)
         s = ""
         for i in range(self.pos):
@@ -46,7 +46,9 @@ class TestLcd():
         self.d.update()
 
     def switch(self):
+        self.r.S = 550
         while(1):
+            self.prt()
             if(self.k.up):
                 self.count[self.pos] = (self.count[self.pos]+1) % 10
             if(self.k.down):

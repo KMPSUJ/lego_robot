@@ -115,21 +115,29 @@ class execution():
 
     def loop(self):
         k = 0
-        self.L.tail(fw(2000))
+        l = 0
+        self.L.tail(fw(4))
         while(True):
             time.sleep(.1)
             if self.R.check_obstacle():
-                self.R.obstacle()
                 self.R.stop()
-                self.L.tail(fw(max(self.stop())))
+                self.R.obstacle()
+               # self.L.head(fw(max(self.stop())))
+                self.L.head(fw(2))
                 self.L.head(tr(1/6.0 + 0.25 * random.random()))
                 self.L.head(bk(1))
+                self.L.head(vd())
                 k += 1
+                self.R.B = True
+                l = 5
             else:
+                l -= 1
                 self.R.start()
-                self.exe()
+                if l < 0:
+                    self.R.B = False
             if (k > 10) or self.R.K.backspace:
                     self.R.shutdown()
+            self.exe()
 
 """while(True):
         time.sleep(.1)
@@ -186,8 +194,8 @@ print (O.order_type)
 print (repr(O))
 O = 'fw10'''
 e = execution()
-e.L.tail(fw(2000))
-e.L.tail(ss(100))
-e.L.tail(fw(1000))
+e.L.tail(fw(2))
+e.L.tail(ss(400))
+e.L.tail(fw(1))
 e.loop()
 
