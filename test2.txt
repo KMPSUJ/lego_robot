@@ -1,1 +1,3 @@
 Testowy comit 2
+
+Dalej pracujemy nad gitem.
