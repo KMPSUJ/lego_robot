@@ -1,4 +1,3 @@
-#!/usr/bin/python
 from ev3.lego import TouchSensor
 from ev3.ev3dev import Motor
 from ev3.ev3dev import LED
