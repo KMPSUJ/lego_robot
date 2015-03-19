@@ -2,6 +2,7 @@ from ev3.lego import TouchSensor
 from ev3.ev3dev import Motor
 from ev3.ev3dev import LED
 from ev3.ev3dev import Tone
+from ev3.ev3dev import Key 
 import unittest
 import time
 import signal
@@ -11,6 +12,7 @@ import sys
 d = TouchSensor()
 m = Motor(port=Motor.PORT.A)
 k = 0
+K = Key()
 l = LED()
 m.run_forever(-50)
 
@@ -39,5 +41,5 @@ while(True):
     else:
       m.start()
       k = 0
-    if(k > 10):
+    if(k > 10 or K.backspace)):
       shutdown_sequence()
