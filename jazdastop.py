@@ -1,6 +1,7 @@
 from ev3.lego import TouchSensor
 from ev3.ev3dev import Motor
 from ev3.ev3dev import LED
+from ev3.ev3dev import Tone
 import unittest
 import time
 import signal
@@ -16,9 +17,19 @@ m.run_forever(-50)
 m.stop_mode = 'brake'
 
 def sigint_handler(signal, frame): #defines interrupt handler
-    m.stop()
-
+    shutdown_sequence()
 signal.signal(signal.SIGINT, sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
+
+def shutdown_sequence():
+    m.stop()
+    m.stop_mode = 'coast'
+    l.left.color=LED.COLOR.AMBER
+    l.left.on()
+    Tone.play(440)
+    sleep(0.1)
+    l.left.color=LED.COLOR.GREEN
+    Tone.stop()
+    sys.exit(0)
 
 while(True):
     time.sleep(.1)
@@ -29,7 +40,4 @@ while(True):
       m.start()
       k = 0
     if(k > 10):
-      l.left.color=LED.COLOR.AMBER
-      l.left.on()
-      break
-l.left.off()
+      shutdown_sequence()
