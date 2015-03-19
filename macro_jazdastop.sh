@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo python jazdastop.py
+sudo python /home/lego-robot/lego_robot/jazdastop.py
