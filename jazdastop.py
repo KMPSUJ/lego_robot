@@ -8,19 +8,20 @@ import time
 import signal
 import sys
 
-
-d = TouchSensor()
-m = Motor(port=Motor.PORT.A)
-k = 0
-K = Key()
-l = LED()
-m.run_forever(-50)
-
-m.stop_mode = 'brake'
+def startup_sequence():
+    global d = TouchSensor()
+    global m = Motor(port=Motor.PORT.A)
+    global k = 0
+    global K = Key()
+    global l = LED()
+    m.run_forever(-50)
+    m.stop_mode = 'brake'
+    l.left.color=LED.COLOR.GREEN
+    l.right.color=LED.COLOR.GREEN
+    signal.signal(signal.SIGINT, sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
 
 def sigint_handler(signal, frame): #defines interrupt handler
     shutdown_sequence()
-signal.signal(signal.SIGINT, sigint_handler)  #sets handler for keyboard interrupt( CTRL + C)
 
 def shutdown_sequence():
     m.stop()
@@ -33,6 +34,8 @@ def shutdown_sequence():
     Tone.stop()
     sys.exit(0)
 
+#end of definitions
+startup_sequence()
 while(True):
     time.sleep(.1)
     if(d.is_pushed):
