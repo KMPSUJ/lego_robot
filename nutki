@@ -1,0 +1,115 @@
+Dźwięk	wczas(w 16 częściach sekundy)'
+g3	2
+0	2
+g3	2,5
+0	1,5
+g3	2,5
+0	1,5
+d#3	2
+0	1
+a#3	0,5
+0	0,5
+g3	3
+0	1
+d#3	2
+0	1
+A#3	0,5
+0	0,5
+g3	5
+0	3
+D4	2,5
+0	1,5
+D4	2,5
+0	1,5
+D4	2,5
+0	1,5
+D#4	1,8
+0	1,2
+A#3	0,5
+0	0,5
+F#3	3	(2,*8)
+0	1
+D#3	1,5
+0	0,5
+A#3	0,5
+0	0,5
+G3	3,5
+0	4,5
+g4	3
+0	1
+g3	2
+0	1
+g3	1,8
+0	1,2
+g4	2,5
+0	1,5
+f#4	2
+0	1
+f4	0,5
+0	0,5
+e4	1
+d#4	0,5
+0	0,5
+e4	1
+0	3
+g#3	1,8
+0	1,2
+c#4	2,5
+
+
+t.play(196.00,125.00)
+time.sleep(125.00)
+t.play(196.00,156.25)
+time.sleep(93.75)
+t.play(196.00,156.25)
+time.sleep(93.75)
+t.play(155.56,125.00)
+time.sleep(62.50)
+t.play(233.08,31.25)
+time.sleep(31.25)
+t.play(196.00,187.50)
+time.sleep(62.50)
+t.play(155.56,125.00)
+time.sleep(62.50)
+t.play(233.08,31.25)
+time.sleep(31.25)
+t.play(196.00,312.50)
+time.sleep(187.50)
+t.play(293.66,156.25)
+time.sleep(93.75)
+t.play(293.66,156.25)
+time.sleep(93.75)
+t.play(293.66,156.25)
+time.sleep(93.75)
+t.play(277.18,112.50)
+time.sleep(75.00)
+t.play(233.08,31.25)
+time.sleep(31.25)
+t.play(369.99,175.00)
+time.sleep(62.50)
+t.play(155.56,93.75)
+time.sleep(31.25)
+t.play(233.08,31.25)
+time.sleep(31.25)
+t.play(196.00,218.75)
+time.sleep(281.25)
+t.play(392.00,187.50)
+time.sleep(62.50)
+t.play(196.00,125.00)
+time.sleep(62.50)
+t.play(196.00,112.50)
+time.sleep(75.00)
+t.play(392.00,156.25)
+time.sleep(93.75)
+t.play(369.99,125.00)
+time.sleep(62.50)
+t.play(349.23,31.25)
+time.sleep(31.25)
+t.play(329.63,62.50)
+t.play(311.13,31.25)
+time.sleep(31.25)
+t.play(329.63,62.50_)
+time.sleep(187.50)
+t.play(207.65,112.50)
+time.sleep(75.00)
+t.play(277.18,156.25)
