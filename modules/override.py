@@ -10,4 +10,5 @@ class m_over(Motor):
       if (v != None):
 	setattr(self, k, v)
     self.pulses_per_second_sp = speed_sp
+    self.position = 0
     self.position_sp = position_sp	

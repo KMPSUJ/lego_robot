@@ -15,17 +15,20 @@ class Robot():
     K = Key()
     L = LED()
     T = Tone()
+    B = False 				#for disabling obstacle check while moving backward
     
     def run(self, value1=300, value2=300):
      self.M1.run_forever(value1)
      self.M2.run_forever(value2)
-    
+     
+
+   
     def go(self):
      self.M1.start()
      self.M2.start()
 
     def check_obstacle(self):
-      return self.touch.is_pushed
+      return (self.touch.is_pushed and (not self.B))
     
     def sigint_handler(signal, frame): #defines interrupt handler
       self.shutdown_sequence()
@@ -64,11 +67,27 @@ class Robot():
     def obstacle(self):	#obstacle is present
       self.L.left.color=LED.COLOR.YELLOW
       self.L.left.on()
+      self.B = True
+      self.run_dist(-1)
+      while(not self.ru()):
+	time.sleep(0.1)
+      self.turn(-10)
+      while(not self.ru()):
+	time.sleep(0.1)
+      self.B = False
       self.stop()
+
+    def ru(self):
+      return ((self.M1.pulses_per_second == 0) and (self.M2.pulses_per_second == 0))
 
     def turn(self, value = 1):
       self.M1.set_rel_position(720*value, speed_sp=300)
-      self.M2.set_rel_position(720*value, speed_sp=-300)
+      self.M2.set_rel_position(-720*value, speed_sp=-300)
+      self.go()
+
+    def run_dist(self,value = 1):
+      self.M1.set_rel_position(720*value, speed_sp=300)
+      self.M2.set_rel_position(720*value, speed_sp=300)
       self.go()
 
      
