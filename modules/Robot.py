@@ -1,4 +1,5 @@
 from ev3.lego import TouchSensor
+from ev3.lego import ColorSensor
 from override import m_over as Motor
 from ev3.ev3dev import LED
 from ev3.ev3dev import Tone
@@ -16,6 +17,7 @@ class Robot():
     K = Key()
     L = LED()
     T = Tone()
+    C = ColorSensor()
     B = False 				#for disabling obstacle check while moving backward
     
     def run(self, value1=300, value2=300):
@@ -85,9 +87,9 @@ class Robot():
     def ru(self):
       return ((self.M1.pulses_per_second == 0) and (self.M2.pulses_per_second == 0))
 
-    def turn(self, value = 1):
-      self.M1.set_rel_position(2248*value, speed_sp=300)
-      self.M2.set_rel_position(-2248*value, speed_sp=-300)
+    def turn(self, value = 1, callibrate = 1):
+      self.M1.set_rel_position( 2248*value*callibrate, speed_sp= 600)
+      self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-600)
       self.go()
 
     def run_dist(self,value = 1):
