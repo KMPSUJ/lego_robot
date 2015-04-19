@@ -22,9 +22,9 @@ class Robot():
     S = 600                             # speed
     CL = 1
 
-    def run(self, value1=self.S, value2=self.S):
-        self.M1.run_forever(value1)
-        self.M2.run_forever(value2)
+    def run(self):
+        self.M1.run_forever(self.S)
+        self.M2.run_forever(self.S)
 
     def go(self):
         self.M1.start()
@@ -79,7 +79,7 @@ class Robot():
         return ((self.M1.pulses_per_second == 0)
                 and (self.M2.pulses_per_second == 0))
 
-    def turn(self, value=1, callibrate=self.CL):
+    def turn(self, value=1, callibrate=1):
         self.M1.set_rel_position(2248*value*callibrate, speed_sp=self.S)
         self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-self.S)
         self.go()
@@ -93,7 +93,7 @@ class Robot():
         self.M1.add_rel_position(value)
         self.M2.add_rel_position(value)
 
-    def add_turn(self, value, callibrate=self.CL):
+    def add_turn(self, value, callibrate=1):
         self.M1.add_rel_position(2248*value*callibrate)
         self.M2.add_rel_position(-2248*value*callibrate)
 

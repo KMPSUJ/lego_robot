@@ -4,6 +4,7 @@ except:
     from modules import Robot_test as r
 import math
 import time
+import random
 
 
 class order():
@@ -52,7 +53,9 @@ class o_list():
                 self.L[i] += self.L.pop(i+1)
 
     def cntr_i(self, a):
-        if self.L[a] & self.L[a+1]:
+        if len(self.L) - 1 >= a:
+            pass
+        elif self.L[a] & self.L[a+1]:
             self.L[a] += self.L.pop(a + 1)
 
     def head(self, order):
@@ -100,7 +103,7 @@ class execution():
         if self.R.still() or (self.O.order_type in self.passable):
             try:
                 self.O = self.L.pop()
-                slef.exe_dic[self.O.order_type](self.O.value)
+                self.exe_dic[self.O.order_type](self.O.value)
             except:
                 self.R.shutdown()
 
@@ -120,11 +123,11 @@ class execution():
                 self.L.tail(fw(max(self.stop())))
                 self.L.head(tr(1/6.0 + 0.25 * random.random()))
                 self.L.head(bk(1))
-                k+=1
+                k += 1
             else:
                 self.R.start()
                 self.exe()
-                if (k >10) or R.K.backspace:
+            if (k > 10) or self.R.K.backspace:
                     self.R.shutdown()
 
 """while(True):
@@ -137,6 +140,7 @@ class execution():
         #   k = 0
             if(k > 10):
             R.shutdown()"""
+
 
 class give_order():
     global tl, tr, tp, ss, fw, vd, bk
@@ -164,8 +168,6 @@ class give_order():
 
     def ss(val=600):            # SetSpeed
         return order('ss', val)
-
-
 
 
 '''l = list()

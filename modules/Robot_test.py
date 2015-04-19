@@ -1,6 +1,5 @@
 import signal
 import random
-import time
 import sys
 
 
@@ -8,7 +7,12 @@ class Robot():
     B = False 				# for disabling obstacle check while moving backward
     s = 600
 
-    def run(self, value1=self.S, value2=self.S):
+    class key():
+        backspace = False
+
+    K = key()
+
+    def run(self):
         print ('run()')
 
     def go(self):
@@ -36,12 +40,12 @@ class Robot():
         sys.exit(0)
 
     def obstacle(self):         # obstacle is present
-       print ('obstacle present')
-#      self.stop()
-#      self.shutdown()
+        print ('obstacle present')
+#       self.stop()
+#       self.shutdown()
 
     def still(self):
-        return (random.random() > 0.5)
+        return (random.random() > 0.9)
 
     def turn(self, value=1):
         print ('turn ' + str(2248*value))
@@ -56,11 +60,8 @@ class Robot():
     def add_dist(self, value):
         print ('added distance' + str(value))
 
-    def add_turn(self, value, callibrate=1):
-        print ('added turn' + str(value))
-
     def left_dist(self):
-        return (-50 + 300*random.random(),-50 + 300*random.random()
+        return (-50 + 300*random.random(), -50 + 300*random.random())
 
     def set_speed(self, val=600):
         if val > 800:
