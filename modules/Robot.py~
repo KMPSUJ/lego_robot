@@ -19,10 +19,8 @@ class Robot():
     T = Tone()
     C = ColorSensor()
     B = False 				# for disabling obstacle check while moving backward
-    S = 600                             # speed
-    CL = 1
 
-    def run(self, value1=self.S, value2=self.S):
+    def run(self, value1=300, value2=300):
         self.M1.run_forever(value1)
         self.M2.run_forever(value2)
 
@@ -46,14 +44,14 @@ class Robot():
         signal.signal(signal.SIGINT, self.sigint_handler)
         # sets handler for keyboard interrupt( CTRL + C)
 
-    def stop(self, val=0):
+    def stop(self):
         self.M1.stop()
         self.M2.stop()
 
     def start(self):
         self.L.left.color = LED.COLOR.GREEN
         self.L.left.on()
-        #self.run()
+        self.run()
 
     def shutdown(self):
         self.stop()
@@ -71,7 +69,17 @@ class Robot():
     def obstacle(self):         # obstacle is present
         self.L.left.color = LED.COLOR.YELLOW
         self.L.left.on()
-        self.T.play(880, 0.01)
+        self.B = True
+        self.run_dist(-1)
+        time.sleep(0.1)
+        while(not self.still()):
+            time.sleep(0.1)
+#       time.sleep(1)
+        self.turn(1/6.0 + 0.25 * random.random())
+        time.sleep(0.1)
+        while(not self.still()):
+            time.sleep(0.1)
+        self.B = False
 #       self.stop()
 #       self.shutdown()
 
@@ -79,29 +87,20 @@ class Robot():
         return ((self.M1.pulses_per_second == 0)
                 and (self.M2.pulses_per_second == 0))
 
-    def turn(self, value=1, callibrate=self.CL):
-        self.M1.set_rel_position(2248*value*callibrate, speed_sp=self.S)
-        self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-self.S)
+    def turn(self, value=1, callibrate=1):
+        self.M1.set_rel_position(2248*value*callibrate, speed_sp=600)
+        self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-600)
         self.go()
 
     def run_dist(self, value=1):
-        self.M1.set_rel_position(720*value, speed_sp=self.S)
-        self.M2.set_rel_position(720*value, speed_sp=self.S)
+        self.M1.set_rel_position(720*value, speed_sp=300)
+        self.M2.set_rel_position(720*value, speed_sp=300)
         self.go()
 
     def add_dist(self, value):
         self.M1.add_rel_position(value)
         self.M2.add_rel_position(value)
 
-    def add_turn(self, value, callibrate=self.CL):
+    def add_turn(self, value, callibrate=1):
         self.M1.add_rel_position(2248*value*callibrate)
         self.M2.add_rel_position(-2248*value*callibrate)
-
-    def left_dist(self):
-        return (M1.position - M1.position_sp, M2.position - M2.position_sp)
-
-    def set_speed(self, val=600):
-        if val > 800:
-            print ('Can\'t go so fast!')
-            val = 800
-        self.S = val
