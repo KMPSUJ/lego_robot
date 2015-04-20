@@ -1,6 +1,7 @@
 try:
     from modules import Robot as r
 except:
+    print ("Testing class")
     from modules import Robot_test as r
 import math
 import time
