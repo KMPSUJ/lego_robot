@@ -186,4 +186,8 @@ print (O.order_type)
 print (repr(O))
 O = 'fw10'''
 e = execution()
+e.L.tail(fw(2000))
+e.L.tail(ss(100))
+e.L.tail(fw(1000))
 e.loop()
+

@@ -7,7 +7,6 @@ from ev3.ev3dev import Key
 import time
 import signal
 import sys
-import random
 
 
 class Robot():
@@ -53,7 +52,7 @@ class Robot():
     def start(self):
         self.L.left.color = LED.COLOR.GREEN
         self.L.left.on()
-        #self.run()
+        # self.run()
 
     def shutdown(self):
         self.stop()
@@ -98,7 +97,8 @@ class Robot():
         self.M2.add_rel_position(-2248*value*callibrate)
 
     def left_dist(self):
-        return (M1.position - M1.position_sp, M2.position - M2.position_sp)
+        return (self.M1.position - self.M1.position_sp,
+                self.M2.position - self.M2.position_sp)
 
     def set_speed(self, val=600):
         if val > 800:
