@@ -17,6 +17,7 @@ class Robot():
     L = LED()
     T = Tone()
     C = ColorSensor()
+<<<<<<< HEAD
     B = False 				# for disabling obstacle check while moving backward
     S = 600                             # speed
     CL = 1
@@ -25,6 +26,16 @@ class Robot():
         self.M1.run_forever(self.S)
         self.M2.run_forever(self.S)
 
+=======
+    B = False 				#for disabling obstacle check while moving backward
+    
+    def run(self, value1=300, value2=300):
+     self.M1.run_forever(value1)
+     self.M2.run_forever(value2)
+     
+
+   
+>>>>>>> 87033328f92405016d35943f5808870c2149faeb
     def go(self):
         self.M1.start()
         self.M2.start()
@@ -55,6 +66,7 @@ class Robot():
         # self.run()
 
     def shutdown(self):
+<<<<<<< HEAD
         self.stop()
         self.M1.stop_mode = 'coast'     # free motor
         self.M2.stop_mode = 'coast'     # free motor
@@ -105,7 +117,7 @@ class Robot():
             print ('Can\'t go so fast!')
             val = 800
         self.S = val
-    def shutdown(self):
+=======
       self.stop()
       self.M1.stop_mode = 'coast'	#free motor
       self.M2.stop_mode = 'coast'	#free motor
@@ -139,13 +151,15 @@ class Robot():
       return ((self.M1.pulses_per_second == 0) and (self.M2.pulses_per_second == 0))
 
     def turn(self, value = 1, callibrate = 1):
-      self.M1.set_rel_position( 2248*value*callibrate, speed_sp= self.S)
-      self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-self.S)
+      self.M1.set_rel_position( 2248*value*callibrate, speed_sp= 600)
+      self.M2.set_rel_position(-2248*value*callibrate, speed_sp=-600)
       self.go()
 
     def run_dist(self,value = 1):
-      self.M1.set_rel_position(720*value, speed_sp=self.S)
-      self.M2.set_rel_position(720*value, speed_sp=self.S)
+      self.M1.set_rel_position(720*value, speed_sp=300)
+      self.M2.set_rel_position(720*value, speed_sp=300)
       self.go()
 
      
+    
+>>>>>>> 87033328f92405016d35943f5808870c2149faeb
