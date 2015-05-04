@@ -14,11 +14,13 @@ st = ''
 s.write(str(datetime.datetime.today()))
 
 while(True):
-    time.sleep(.01)
+    t = time.time()
     ref = R.C.rgb
     if ref[1] < 145:
         R.T.play(440,80)
     st += (str(ref))
+    st += str(datetime.datetime.now().isoformat())
+    print ('a', time.time() - t)
     st += ('\n')
     if(R.check_obstacle()):
         R.obstacle()
@@ -26,6 +28,8 @@ while(True):
     else:
         R.start()
         #     k = 0
+    
+    print ('b', time.time() - t)
     if(k > 10 or R.K.backspace):
         s.write(st)
         s.close()
