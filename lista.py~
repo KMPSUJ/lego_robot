@@ -121,11 +121,11 @@ class execution():
             t = random.random()
             t = t*0.2 + 0.05
             self.L.tail(tl(t))
-            self.L.tail(fw(abs(3/math.sin(t*(2*math.pi)))))
+            self.L.tail(fw(math.abs(3/math.sin(t*(2*math.pi)))))
             self.L.tail(tr(t)) 
             t = random.random()
             self.L.tail(tr(t))
-            self.L.tail(fw(abs(3/math.sin(t*(2*math.pi)))))
+            self.L.tail(fw(math.abs(3/math.sin(t*(2*math.pi)))))
             self.L.tail(tl(t))
  
         #self.L.tail(fw(4))

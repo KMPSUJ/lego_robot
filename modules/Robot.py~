@@ -16,7 +16,7 @@ class Robot():
     K = Key()
     L = LED()
     T = Tone()
-#    C = ColorSensor()
+    C = ColorSensor()
     B = False 				# for disabling obstacle check while moving backward
     S = 600                             # speed
     CL = 1
