@@ -10,13 +10,17 @@ import sys
 
 
 class Robot():
-    touch = TouchSensor()
+    try:
+        touch = TouchSensor()
+        C = ColorSensor()
+    except:
+        print("Sensors not attached")
+
     M1 = Motor(port=Motor.PORT.A)
     M2 = Motor(port=Motor.PORT.D)
     K = Key()
     L = LED()
     T = Tone()
-#    C = ColorSensor()
     B = False 				# for disabling obstacle check while moving backward
     S = 600                             # speed
     CL = 1
@@ -26,10 +30,9 @@ class Robot():
         self.M2.run_forever(self.S)
 
     def run(self, value1=300, value2=300):
-     self.M1.run_forever(value1)
-     self.M2.run_forever(value2)
-     
-   
+        self.M1.run_forever(value1)
+        self.M2.run_forever(value2)
+
     def go(self):
         self.M1.start()
         self.M2.start()
