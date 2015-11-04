@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
 from ev3.lego import TouchSensor
 from ev3.lego import ColorSensor
 from ev3.lego import InfraredSensor
 from override import m_over as Motor
+from ev3.lego import MediumMotor as MMotor
 from ev3.ev3dev import LED
 from ev3.ev3dev import Tone
 from ev3.ev3dev import Key
@@ -24,9 +26,9 @@ class Robot():
 		self.S = 600                 # speed
 		
 		try:
-			self.A = Motor0(port=Motor.PORT.A)
+			self.A = Motor(port=Motor.PORT.A)
 			self.D = Motor(port=Motor.PORT.C)
-			
+			self.B = MMotor(port=MMotor.PORT.B)
 
 		except:
 			self.L.left.color = LED.COLOR.RED
@@ -50,8 +52,10 @@ class Robot():
 
 		self.A.stop_mode = 'brake'     # robot stops in place
 		self.D.stop_mode = 'brake'     # robot stops in place
+		self.B.stop_mode = 'brake'
 		self.A.regulation_mode = True
 		self.D.regulation_mode = True
+		self.B.regulation_mode = True
 		self.L.left.color = LED.COLOR.GREEN
 		self.L.right.color = LED.COLOR.GREEN
 		signal.signal(signal.SIGINT, self.sigint_handler)
@@ -87,6 +91,7 @@ class Robot():
 	def stop(self, val=0):
 		self.A.stop()
 		self.D.stop()
+		self.B.stop()
 
 	def start(self):
 		self.L.left.color = LED.COLOR.GREEN
@@ -97,6 +102,7 @@ class Robot():
 		self.stop()
 		self.A.stop_mode = 'coast'     # free motor
 		self.D.stop_mode = 'coast'     # free motor
+		self.B.stop_mode = 'coast'
 		self.L.left.color = LED.COLOR.AMBER
 		self.L.left.on()
 		self.T.play(440)
